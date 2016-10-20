@@ -48,12 +48,4 @@ RUN apt-get -y update \
   && rm -rf /var/lib/apt/lists/* \
   && firefox --version && chromium-browser --version && /usr/bin/chromedriver --version && geckodriver --version
 
-COPY . /tmp/bzt-src
-RUN pip install /tmp/bzt-src \
-  && echo '{"install-id": "Docker"}' > /etc/bzt.d/99-zinstallID.json \
-  && echo '{"settings": {"artifacts-dir": "/tmp/artifacts"}}' > /etc/bzt.d/90-artifacts-dir.json \
-  && echo '{"modules": {"console": {"disable": true}}}' > /etc/bzt.d/90-no-console.json
-
-RUN bzt /tmp/bzt-src/examples/all-executors.yml -o settings.artifacts-dir=/tmp/all-executors-artifacts || cat /tmp/all-executors-artifacts/webdriver-1.log; exit 1
-
 VOLUME ${LINUX_PATH}
