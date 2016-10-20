@@ -48,4 +48,3 @@ RUN apt-get -y update \
   && rm -rf /var/lib/apt/lists/* \
   && firefox --version && chromium-browser --version && /usr/bin/chromedriver --version && geckodriver --version
 
-VOLUME ${LINUX_PATH}
